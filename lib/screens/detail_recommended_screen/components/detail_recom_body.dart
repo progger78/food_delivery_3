@@ -32,7 +32,7 @@ class DetailRecomBody extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   AppIcon(icon: Icons.arrow_back),
                   AppIcon(icon: Icons.shopping_cart)
                 ],
@@ -43,7 +43,7 @@ class DetailRecomBody extends StatelessWidget {
             bottom: 0,
             child: Container(
               width: size.width,
-              height: size.height * 0.6,
+              height: size.height * 0.5,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -105,8 +105,8 @@ class DetailRecomBody extends StatelessWidget {
                       color: Colors.black,
                     ),
                     SizedBox(height: Dimensions.height10),
-                    Expanded(
-                      child: const SingleChildScrollView(
+                    const Expanded(
+                      child: SingleChildScrollView(
                         child: ExpandableText(
                             text:
                                 'Средняя скорость печати составляет всего 207 знаков в минуту. Чтобы улучшить навыки набора текста и научиться печатать, как профессионал, нужно постоянно тренироватьсяЗапомни: практика, практика и еще раз практика. Исследования показали, что постоянная практика помогает превысить средний показатель скорости печати в три раза. Проверить скорость печати онлайн ты можешь вместе с Ratatype.'),

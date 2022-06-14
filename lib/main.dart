@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_3/screens/detail_popular_screen/detail_popular_screen.dart';
 import 'package:food_delivery_3/utils/configurations.dart';
 import 'package:get/get.dart';
 
-import 'screens/detail_recommended_screen/detail_recommended_screen.dart';
-import 'screens/home_screen/home_screen.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           secondary: AppColors.yelowColor,
         ),
       ),
-      home: const DetailRecommendedScreen(),
+      home: const DetailPopularScreen(),
     );
   }
 }

@@ -29,7 +29,7 @@ class Header extends StatelessWidget {
                   AppSmallText(text: 'St-Petersburg'),
                   Padding(
                     padding: EdgeInsets.only(top: 3, right: 2),
-                    child: Icon(Icons.expand_more_sharp),
+                    child: Icon(Icons.arrow_drop_down_rounded),
                   )
                 ],
               )

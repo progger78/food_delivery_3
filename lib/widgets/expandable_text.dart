@@ -43,31 +43,31 @@ class _ExpandableTextState extends State<ExpandableText> {
                     text: hiddenText
                         ? ('$firstHalf...')
                         : (firstHalf + secondHalf)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    AppSmallText(
-                      text: hiddenText ? ('Show More') : ('Show Less'),
-                      color: AppColors.mainColor,
-                    ),
-                    Padding(
-                      padding:  EdgeInsets.only(top: Dimensions.height5 - 1),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(
-                            () {
-                              hiddenText = !hiddenText;
-                            },
-                          );
-                        },
+                GestureDetector(
+                  onTap: () {
+                    setState(
+                      () {
+                        hiddenText = !hiddenText;
+                      },
+                    );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      AppSmallText(
+                        text: hiddenText ? ('Show More') : ('Show Less'),
+                        color: AppColors.mainColor,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: Dimensions.height5 - 1),
                         child: Icon(
                           (hiddenText ? Icons.expand_more : Icons.expand_less),
                           color: AppColors.mainColor,
                         ),
                       ),
-                    )
-                  ],
-                )
+                    ],
+                  ),
+                ),
               ],
             ),
     );

@@ -11,6 +11,8 @@ class AppBigText extends StatelessWidget {
       this.isBigger = false,
       this.color = AppColors.mainColor,
       this.size,
+      this.fontWeight,
+
       this.overflow = TextOverflow.ellipsis})
       : super(key: key);
 
@@ -19,6 +21,8 @@ class AppBigText extends StatelessWidget {
    double? size;
   final TextOverflow overflow;
   bool isBigger;
+  dynamic fontWeight;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class AppBigText extends StatelessWidget {
       maxLines: 1,
       text,
       style: GoogleFonts.lato(
-        fontWeight: FontWeight.bold,
+        fontWeight:fontWeight ?? FontWeight.bold ,
         fontSize: isBigger ? Dimensions.font30 : size,
         color: color
       ),

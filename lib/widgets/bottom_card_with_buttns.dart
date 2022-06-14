@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_3/utils/utils.dart';
-import 'package:food_delivery_3/widgets/app_big_text.dart';
-import 'package:food_delivery_3/widgets/app_small_text.dart';
+import '/utils/utils.dart';
+import '/widgets/app_big_text.dart';
+import '/widgets/app_small_text.dart';
 
 class BottomCardWithButns extends StatelessWidget {
   BottomCardWithButns(
@@ -67,7 +67,7 @@ class BottomCardWithButns extends StatelessWidget {
                     )
                   : IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.favorite,
                         color: AppColors.mainColor,
                       ),
@@ -77,7 +77,7 @@ class BottomCardWithButns extends StatelessWidget {
               child: Container(
                 alignment: Alignment.bottomCenter,
                 margin: EdgeInsets.only(
-                    left: Dimensions.width10, right: Dimensions.width10),
+                    left: Dimensions.width15, right: Dimensions.width15),
                 height: Dimensions.height70,
                 width: width,
                 decoration: BoxDecoration(
