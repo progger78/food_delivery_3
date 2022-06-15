@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/products_model.dart';
 import '../../../utils/utils.dart';
-import '../../../widgets/stars_with_comments.dart';
 import '../../../widgets/widgets.dart';
 
 
 class PageBldrCard extends StatelessWidget {
   const PageBldrCard({
-    Key? key,
+    Key? key, required this.popularProduct,
   }) : super(key: key);
 
+  final ProductModel popularProduct;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var gottenStars = 4;
+ 
     return Container(
       height: size.height * 0.16,
       decoration: BoxDecoration(
@@ -36,7 +37,7 @@ class PageBldrCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
           AppBigText(
-                text: 'Delisous Chinese Meal',
+                text: popularProduct.name!,
                 color: Colors.black,
               ),
               SizedBox(
@@ -44,7 +45,7 @@ class PageBldrCard extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(right: Dimensions.width10),
-                child: StarsWithComments(gottenStars: gottenStars),
+                child: StarsWithComments(popularProduct: popularProduct),
               ),
               Container(
                 padding: EdgeInsets.only(

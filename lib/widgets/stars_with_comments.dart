@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_3/models/products_model.dart';
 
 import '../utils/utils.dart';
 import 'widgets.dart';
 
 class StarsWithComments extends StatelessWidget {
   const StarsWithComments({
-    Key? key, this.gottenStars = 5,
+    Key? key, this.popularProduct, 
   
   }) : super(key: key);
   
-  final int gottenStars;
+  final ProductModel? popularProduct;
   
 
   @override
@@ -22,7 +23,7 @@ class StarsWithComments extends StatelessWidget {
             5,
             (index) => Icon(
               Icons.star,
-              color: AppColors.mainColor,
+              color: (popularProduct?.stars)! > index ? AppColors.mainColor : Colors.grey,
               size: Dimensions.height20,
             ),
           ),
@@ -31,7 +32,7 @@ class StarsWithComments extends StatelessWidget {
           width: Dimensions.width5,
         ),
         AppSmallText(
-            text: '(${gottenStars.toStringAsFixed(1)})',
+            text: '(${popularProduct?.stars!.toStringAsFixed(1)})',
             color: AppColors.mainTextColor),
         SizedBox(
           width: Dimensions.width25,

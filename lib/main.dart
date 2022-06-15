@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_3/screens/detail_popular_screen/detail_popular_screen.dart';
-import 'package:food_delivery_3/utils/configurations.dart';
+import '/controllers/popular_product_controller.dart';
+import '/controllers/recommended_product_controller.dart';
+import '/utils/configurations.dart';
 import 'package:get/get.dart';
+import 'helper/dependencies.dart' as dep;
+import 'screens/home_screen/home_screen.dart';
 
 
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food delivery',
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
           secondary: AppColors.yelowColor,
         ),
       ),
-      home: const DetailPopularScreen(),
+      home: const HomeScreen(),
     );
   }
 }
