@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '/utils/utils.dart';
+import 'package:food_delivery_3/models/products_model.dart';
+import 'package:food_delivery_3/routes/route_helper.dart';
+import 'package:get/get.dart';
 
+import '/utils/utils.dart';
 
 import '../../../widgets/widgets.dart';
 
-class DetailRecomBody extends StatelessWidget {
-  const DetailRecomBody({Key? key}) : super(key: key);
+class DetailPopularBody extends StatelessWidget {
+  DetailPopularBody({Key? key, this.product}) : super(key: key);
+
+  ProductModel? product;
 
   @override
   Widget build(BuildContext context) {
+    
     Size size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height,
@@ -19,9 +25,10 @@ class DetailRecomBody extends StatelessWidget {
           Container(
             width: size.width,
             height: size.height * 0.45,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/image/food0.png'),
+                  image: NetworkImage(
+                      '${AppConstants.baseUrl}/uploads/${product?.img}'),
                   fit: BoxFit.cover),
             ),
             child: Container(
@@ -33,7 +40,9 @@ class DetailRecomBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppIcon(icon: Icons.arrow_back),
+                  GestureDetector(
+                      onTap: () => Get.toNamed(RouteHelper.initialRoute),
+                      child: AppIcon(icon: Icons.arrow_back)),
                   AppIcon(icon: Icons.shopping_cart)
                 ],
               ),
@@ -62,12 +71,14 @@ class DetailRecomBody extends StatelessWidget {
                   children: [
                     AppBigText(
                       isBigger: true,
-                      text: 'Chinese Theme',
+                      text: (product?.name)!,
                       color: Colors.black,
                       size: Dimensions.font22,
                     ),
                     SizedBox(height: Dimensions.height15),
-                    const StarsWithComments(),
+                    StarsWithComments(
+                      isDetail: true,
+                    ),
                     SizedBox(height: Dimensions.height25),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,11 +116,9 @@ class DetailRecomBody extends StatelessWidget {
                       color: Colors.black,
                     ),
                     SizedBox(height: Dimensions.height10),
-                    const Expanded(
+                    Expanded(
                       child: SingleChildScrollView(
-                        child: ExpandableText(
-                            text:
-                                'Средняя скорость печати составляет всего 207 знаков в минуту. Чтобы улучшить навыки набора текста и научиться печатать, как профессионал, нужно постоянно тренироватьсяЗапомни: практика, практика и еще раз практика. Исследования показали, что постоянная практика помогает превысить средний показатель скорости печати в три раза. Проверить скорость печати онлайн ты можешь вместе с Ratatype.'),
+                        child: ExpandableText(text: (product?.description)!),
                       ),
                     )
                   ],

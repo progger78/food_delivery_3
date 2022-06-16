@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_3/controllers/recommended_product_controller.dart';
+import 'package:get/get.dart';
+import '../../models/products_model.dart';
 import '/utils/utils.dart';
 import '/widgets/bottom_card_with_buttns.dart';
 import '/widgets/widgets.dart';
-import 'components/detail_popular_body.dart';
+import 'components/detail_recommended_screen.dart';
 
-class DetailPopularScreen extends StatelessWidget {
-  const DetailPopularScreen({Key? key}) : super(key: key);
+class DetailRecommendedScreen extends StatelessWidget {
+  DetailRecommendedScreen({Key? key, this.pageId}) : super(key: key);
+
+  int? pageId;
 
   @override
   Widget build(BuildContext context) {
+    ProductModel recommendedProduct = Get.find<RecommendedProductController>()
+        .recommendedProductList[pageId!];
     return Scaffold(
-      body: const DetailPopularBody(),
+      body: DetailRecommendedBody(recommendedProduct: recommendedProduct),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: Dimensions.height70, 
-          // padding: EdgeInsets.only(bottom: Dimensions.height5),
+          SizedBox(
+            height: Dimensions.height70,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -24,7 +31,13 @@ class DetailPopularScreen extends StatelessWidget {
                   iconColor: Colors.white,
                   backgorundColor: AppColors.mainColor,
                 ),
-                AppBigText(isBigger: true, text: '\$${15.99}  X  ${0}', size: Dimensions.font22, color: Colors.black, fontWeight: FontWeight.w500,),
+                AppBigText(
+                  isBigger: true,
+                  text: '\$${recommendedProduct.price}  X  ${0}',
+                  size: Dimensions.font22,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                ),
                 AppIcon(
                   icon: Icons.add,
                   iconColor: Colors.white,
@@ -33,7 +46,7 @@ class DetailPopularScreen extends StatelessWidget {
               ],
             ),
           ),
-          BottomCardWithButns(isCounter: false)
+          BottomCardWithButns(isCounter: false, recommendedProduct: recommendedProduct,)
         ],
       ),
     );

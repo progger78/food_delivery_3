@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_3/models/products_model.dart';
 import '/utils/utils.dart';
 import '/widgets/app_big_text.dart';
 import '/widgets/app_small_text.dart';
@@ -9,13 +10,17 @@ class BottomCardWithButns extends StatelessWidget {
       this.width,
       required this.isCounter,
       this.productQuantity = 0,
-      this.productPrice = 18.9})
+      this.productPrice = 18.9,
+      this.popularProduct,
+      this.recommendedProduct})
       : super(key: key);
 
   final double? width;
   int productQuantity;
   final bool isCounter;
   double? productPrice;
+  ProductModel? popularProduct;
+  ProductModel? recommendedProduct;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -91,7 +96,7 @@ class BottomCardWithButns extends StatelessWidget {
                     children: [
                       AppSmallText(
                         differSize: true,
-                        text: '\$${productPrice!.toStringAsFixed(2)}',
+                        text: isCounter ? '\$${popularProduct?.price!.toStringAsFixed(2)}' :  '\$${recommendedProduct?.price!.toStringAsFixed(2)}',
                         color: Colors.white,
                         size: Dimensions.font26 - 2,
                       ),

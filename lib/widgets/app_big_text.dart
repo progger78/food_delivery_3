@@ -30,7 +30,7 @@ class AppBigText extends StatelessWidget {
       maxLines: 1,
       text,
       style: GoogleFonts.lato(
-        fontWeight:fontWeight ?? FontWeight.bold ,
+        fontWeight:fontWeight ?? FontWeight.w500 ,
         fontSize: !isBigger ? Dimensions.font22 : size,
         color: color
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_3/routes/route_helper.dart';
 import '/controllers/popular_product_controller.dart';
 import '/controllers/recommended_product_controller.dart';
 import '/utils/configurations.dart';
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const HomeScreen(),
+      initialRoute: RouteHelper.initialRoute,
+      getPages: RouteHelper.routes,
     );
   }
 }
