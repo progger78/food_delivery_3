@@ -12,19 +12,22 @@ class AppIcon extends StatelessWidget {
   final IconData icon;
   Color? backgorundColor;
   Color? iconColor;
+  
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: Dimensions.height45,
-      width: Dimensions.width45,
+      height: Dimensions.height45+5,
+      width: Dimensions.width45+5,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: backgorundColor,
       ),
       child: Icon(
+        
         icon,
         color: iconColor,
+        size: Dimensions.height25,
       ),
     );
   }

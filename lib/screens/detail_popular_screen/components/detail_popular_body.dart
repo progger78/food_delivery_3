@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_3/controllers/popular_product_controller.dart';
 
 import 'package:food_delivery_3/models/products_model.dart';
 import 'package:food_delivery_3/routes/route_helper.dart';
@@ -15,7 +16,6 @@ class DetailPopularBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     Size size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height,
@@ -43,7 +43,58 @@ class DetailPopularBody extends StatelessWidget {
                   GestureDetector(
                       onTap: () => Get.toNamed(RouteHelper.initialRoute),
                       child: AppIcon(icon: Icons.arrow_back)),
-                  AppIcon(icon: Icons.shopping_cart)
+                  GetBuilder<PopularProductController>(
+                    builder: (product) {
+                      return Stack(
+                        children: [
+                          AppIcon(
+                            icon: Icons.shopping_cart,
+                          ),
+                          Get.find<PopularProductController>().totalAmount >= 1
+                              
+                          ? Positioned(
+                              top: 2,
+                              right: 2,
+                              child: Container(
+                                
+                                alignment: Alignment.center,
+                                height: Dimensions.height20,
+                                width: Dimensions.width20,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.mainColor),
+                                child: FittedBox(
+                                  child: AppSmallText(
+                                    text: product.totalAmount.toString(),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ) : Container()
+                                  
+                                
+                            
+                          // : Positioned(
+                          //     top: Dimensions.width5,
+                          //     right: Dimensions.width5,
+                          //     child: Container(
+                          //       padding: EdgeInsets.only(bottom: 5),
+                          //       alignment: Alignment.center,
+                          //       height: Dimensions.height20,
+                          //       width: Dimensions.width20,
+                          //       decoration: BoxDecoration(
+                          //           shape: BoxShape.circle,
+                          //           color: AppColors.mainColor),
+                          //       child: AppSmallText(
+                          //         text: product.totalAmount.toString(),
+                          //         color: Colors.white,
+                          //       ),
+                          //     ),
+                          //   ),
+                        ],
+                      );
+                    },
+                  )
                 ],
               ),
             ),
