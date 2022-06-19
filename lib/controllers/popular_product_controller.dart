@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_3/controllers/cart_controller.dart';
 import 'package:food_delivery_3/data/repository/popular_product_repo.dart';
+import 'package:food_delivery_3/models/cart_model.dart';
 import 'package:food_delivery_3/models/products_model.dart';
 import 'package:food_delivery_3/utils/configurations.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class PopularProductController extends GetxController {
   int get quantity => _quantity;
   int _inCartItems = 0;
   int get inCartItems => _inCartItems + _quantity;
-  late CartController _cart;
+  late CartController? _cart;
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
@@ -44,6 +45,10 @@ class PopularProductController extends GetxController {
     if ((_inCartItems + quantity) < 0) {
       Get.snackbar('Item count', 'You can\'t reduce more',
           backgroundColor: AppColors.mainColor, colorText: Colors.white);
+      if (_inCartItems > 0) {
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
     } else if (_inCartItems + quantity > 15) {
       Get.snackbar('Item count', 'You can\'t add  more',
@@ -59,24 +64,28 @@ class PopularProductController extends GetxController {
     _inCartItems = 0;
     _cart = cart;
     var exist = false;
-    exist = _cart.existsInCart(product);
+    exist = _cart!.existsInCart(product);
     print('exist or not' + exist.toString());
     if (exist) {
-      _inCartItems = _cart.getQuantity(product);
+      _inCartItems = _cart!.getQuantity(product);
       print('quantity is' + _inCartItems.toString());
     }
   }
 
   void addItem(ProductModel product) {
-    _cart.addItem(product, _quantity);
+    _cart!.addItem(product, _quantity);
 
-    _cart.items.forEach((key, value) {
+    _cart!.items.forEach((key, value) {
       print('product id is ${value.id}quantity is ${value.quantity}');
     });
     update();
   }
 
   int get totalAmount {
-    return _cart.totalAmount;
+    return _cart!.totalAmount;
+  }
+
+  List<CartModel?> get getItems {
+    return _cart!.getItems;
   }
 }

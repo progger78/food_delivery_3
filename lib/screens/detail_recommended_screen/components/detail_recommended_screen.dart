@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_3/models/products_model.dart';
 import 'package:get/get.dart';
+import '../../../controllers/popular_product_controller.dart';
 import '../../../routes/route_helper.dart';
 import '/utils/utils.dart';
 import '/widgets/widgets.dart';
@@ -27,7 +28,42 @@ class DetailRecommendedBody extends StatelessWidget {
                     child: AppIcon(
                       icon: Icons.close,
                     )),
-                AppIcon(icon: Icons.shopping_cart)
+                // AppIcon(icon: Icons.shopping_cart)
+                 GetBuilder<PopularProductController>(
+                    builder: (product) {
+                      return Stack(
+                        children: [
+                          AppIcon(
+                            icon: Icons.shopping_cart,
+                          ),
+                          Get.find<PopularProductController>().totalAmount >= 1
+                              
+                          ? Positioned(
+                              top: 2,
+                              right: 2,
+                              child: Container(
+                                
+                                alignment: Alignment.center,
+                                height: Dimensions.height20,
+                                width: Dimensions.width20,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.mainColor),
+                                child: FittedBox(
+                                  child: AppSmallText(
+                                    text: product.totalAmount.toString(),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ) : Container()
+                                  
+                                
+                        
+                        ],
+                      );
+                    },
+                  )
               ],
             ),
           ),

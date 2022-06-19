@@ -47,50 +47,32 @@ class DetailPopularBody extends StatelessWidget {
                     builder: (product) {
                       return Stack(
                         children: [
-                          AppIcon(
-                            icon: Icons.shopping_cart,
+                          GestureDetector(
+                            onTap: () => Get.toNamed(RouteHelper.cartScreen),
+                            child: AppIcon(
+                              icon: Icons.shopping_cart,
+                            ),
                           ),
                           Get.find<PopularProductController>().totalAmount >= 1
-                              
-                          ? Positioned(
-                              top: 2,
-                              right: 2,
-                              child: Container(
-                                
-                                alignment: Alignment.center,
-                                height: Dimensions.height20,
-                                width: Dimensions.width20,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.mainColor),
-                                child: FittedBox(
-                                  child: AppSmallText(
-                                    text: product.totalAmount.toString(),
-                                    color: Colors.white,
+                              ? Positioned(
+                                  top: 2,
+                                  right: 2,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: Dimensions.height20,
+                                    width: Dimensions.width20,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.mainColor),
+                                    child: FittedBox(
+                                      child: AppSmallText(
+                                        text: product.totalAmount.toString(),
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ) : Container()
-                                  
-                                
-                            
-                          // : Positioned(
-                          //     top: Dimensions.width5,
-                          //     right: Dimensions.width5,
-                          //     child: Container(
-                          //       padding: EdgeInsets.only(bottom: 5),
-                          //       alignment: Alignment.center,
-                          //       height: Dimensions.height20,
-                          //       width: Dimensions.width20,
-                          //       decoration: BoxDecoration(
-                          //           shape: BoxShape.circle,
-                          //           color: AppColors.mainColor),
-                          //       child: AppSmallText(
-                          //         text: product.totalAmount.toString(),
-                          //         color: Colors.white,
-                          //       ),
-                          //     ),
-                          //   ),
+                                )
+                              : Container()
                         ],
                       );
                     },
