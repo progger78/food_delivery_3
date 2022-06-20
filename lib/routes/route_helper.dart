@@ -12,11 +12,11 @@ class RouteHelper {
   static const String popularFood = '/popular-food';
   static const String cartScreen = '/cart-screen';
 
-  static String getInitial() => '$initialRoute';
-  static String getPopularFood(int pageId) => '$popularFood?pageId=$pageId';
-  static String getRecommendedFood(int pageId) =>
-      '$recommendedFood?pageId=$pageId';
-  static String getCartScreen() => '$cartScreen';
+  static String getInitial() => initialRoute;
+  static String getPopularFood(int pageId, String page) => '$popularFood?pageId=$pageId&page=$page';
+  static String getRecommendedFood(int pageId, String page) =>
+      '$recommendedFood?pageId=$pageId&page=$page';
+  static String getCartScreen() => cartScreen;
 
   static List<GetPage> routes = [
     GetPage(
@@ -29,8 +29,10 @@ class RouteHelper {
         transition: Transition.fadeIn,
         page: () {
           var pageId = Get.parameters['pageId'];
+          var page = Get.parameters['page'];
           return DetailRecommendedScreen(
             pageId: int.parse(pageId!),
+            page: page
           );
         }),
     GetPage(
@@ -38,16 +40,18 @@ class RouteHelper {
         transition: Transition.fadeIn,
         page: () {
           var pageId = Get.parameters['pageId'];
+          var page = Get.parameters['page'];
           return DetailPopularScreen(
             pageId: int.parse(
               pageId!,
             ),
+            page: page!
           );
         }),
     GetPage(
       name: cartScreen,
       page: () {
-        return CartScreen();
+        return const CartScreen();
       },
     )
   ];

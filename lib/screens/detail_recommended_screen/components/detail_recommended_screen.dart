@@ -7,9 +7,11 @@ import '/utils/utils.dart';
 import '/widgets/widgets.dart';
 
 class DetailRecommendedBody extends StatelessWidget {
-  DetailRecommendedBody({Key? key, this.recommendedProduct}) : super(key: key);
+  DetailRecommendedBody({Key? key, this.recommendedProduct, this.page})
+      : super(key: key);
 
   ProductModel? recommendedProduct;
+  String? page;
 
   @override
   Widget build(BuildContext context) {
@@ -24,46 +26,55 @@ class DetailRecommendedBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                    onTap: () => Get.toNamed(RouteHelper.initialRoute),
+                    onTap: () {
+                      if (page == 'cart-screen') {
+                        Get.toNamed(RouteHelper.getCartScreen());
+                      } else {
+                        Get.toNamed(RouteHelper.getInitial());
+                      }
+                    },
                     child: AppIcon(
                       icon: Icons.close,
                     )),
                 // AppIcon(icon: Icons.shopping_cart)
-                 GetBuilder<PopularProductController>(
-                    builder: (product) {
-                      return Stack(
+                GetBuilder<PopularProductController>(
+                  builder: (product) {
+                    return GestureDetector(
+                      onTap: () {
+                        product.totalItems <= 0
+                            ? null
+                            : Get.toNamed(RouteHelper.cartScreen);
+                      },
+                      child: Stack(
                         children: [
                           AppIcon(
                             icon: Icons.shopping_cart,
                           ),
-                          Get.find<PopularProductController>().totalAmount >= 1
-                              
-                          ? Positioned(
-                              top: 2,
-                              right: 2,
-                              child: Container(
-                                
-                                alignment: Alignment.center,
-                                height: Dimensions.height20,
-                                width: Dimensions.width20,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.mainColor),
-                                child: FittedBox(
-                                  child: AppSmallText(
-                                    text: product.totalAmount.toString(),
-                                    color: Colors.white,
+                          Get.find<PopularProductController>().totalItems >= 1
+                              ? Positioned(
+                                  top: 2,
+                                  right: 2,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: Dimensions.height20,
+                                    width: Dimensions.width20,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.mainColor),
+                                    child: FittedBox(
+                                      child: AppSmallText(
+                                        text: product.totalItems.toString(),
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ) : Container()
-                                  
-                                
-                        
+                                )
+                              : Container()
                         ],
-                      );
-                    },
-                  )
+                      ),
+                    );
+                  },
+                )
               ],
             ),
           ),
@@ -95,11 +106,12 @@ class DetailRecommendedBody extends StatelessWidget {
           backgroundColor: AppColors.yelowColor,
           expandedHeight: Dimensions.height80 * 4,
           flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-            '${AppConstants.baseUrl}/uploads/${(recommendedProduct?.img)!}',
-            fit: BoxFit.cover,
-            width: double.maxFinite,
-          )),
+            background: Image.network(
+              '${AppConstants.baseUrl}/uploads/${(recommendedProduct?.img)!}',
+              fit: BoxFit.cover,
+              width: double.maxFinite,
+            ),
+          ),
         ),
         SliverToBoxAdapter(
           child: Container(

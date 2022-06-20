@@ -10,9 +10,11 @@ import '/widgets/widgets.dart';
 import 'components/detail_recommended_screen.dart';
 
 class DetailRecommendedScreen extends StatelessWidget {
-  DetailRecommendedScreen({Key? key, this.pageId}) : super(key: key);
+  DetailRecommendedScreen({Key? key, this.pageId, required this.page})
+      : super(key: key);
 
   int? pageId;
+  String? page;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,8 @@ class DetailRecommendedScreen extends StatelessWidget {
     Get.find<PopularProductController>()
         .initProduct(recommendedProduct, Get.find<CartController>());
     return Scaffold(
-      body: DetailRecommendedBody(recommendedProduct: recommendedProduct),
+      body: DetailRecommendedBody(
+          recommendedProduct: recommendedProduct, page: page),
       bottomNavigationBar: GetBuilder<PopularProductController>(
         builder: (controller) {
           return Column(

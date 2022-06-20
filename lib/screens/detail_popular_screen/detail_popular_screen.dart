@@ -8,9 +8,10 @@ import '../../models/products_model.dart';
 import 'components/detail_popular_body.dart';
 
 class DetailPopularScreen extends StatelessWidget {
-   DetailPopularScreen({Key? key, this.pageId}) : super(key: key);
+   DetailPopularScreen({Key? key, this.pageId, required this.page}) : super(key: key);
 
   int? pageId;
+  String page;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class DetailPopularScreen extends StatelessWidget {
         Get.find<PopularProductController>()
         .initProduct(product, Get.find<CartController>());
     return Scaffold(
-      body:  DetailPopularBody(product: product),
+      body:  DetailPopularBody(product: product, page: page,),
       bottomNavigationBar: BottomCardWithButns(isCounter: true, popularProduct: product ),
     );
   }

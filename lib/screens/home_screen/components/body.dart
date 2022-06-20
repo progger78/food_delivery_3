@@ -109,7 +109,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               scrollDirection: Axis.vertical,
               itemCount: recommendedProduct.recommendedProductList.length,
               itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(onTap: () => Get.toNamed(RouteHelper.getRecommendedFood(index)),
+                return GestureDetector(onTap: () => Get.toNamed(RouteHelper.getRecommendedFood(index, '')),
                   child: Container(
                     margin: EdgeInsets.only(
                       left: Dimensions.width15,
@@ -245,7 +245,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             width: size.width,
           ),
           GestureDetector(
-            onTap: () => Get.toNamed(RouteHelper.getPopularFood(index)),
+            onTap: () => Get.toNamed(RouteHelper.getPopularFood(index, '')),
             child: Container(
               margin: EdgeInsets.only(
                   top: Dimensions.height15,

@@ -10,9 +10,10 @@ import '/utils/utils.dart';
 import '../../../widgets/widgets.dart';
 
 class DetailPopularBody extends StatelessWidget {
-  DetailPopularBody({Key? key, this.product}) : super(key: key);
+  DetailPopularBody({Key? key, this.product, this.page}) : super(key: key);
 
   ProductModel? product;
+  String? page;
 
   @override
   Widget build(BuildContext context) {
@@ -41,19 +42,29 @@ class DetailPopularBody extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                      onTap: () => Get.toNamed(RouteHelper.initialRoute),
+                      onTap: () {
+                        if (page == 'cart-screen') {
+                          Get.toNamed(RouteHelper.getCartScreen());
+                        } else {
+                          Get.toNamed(RouteHelper.getInitial());
+                        }
+                      },
                       child: AppIcon(icon: Icons.arrow_back)),
                   GetBuilder<PopularProductController>(
                     builder: (product) {
                       return Stack(
                         children: [
                           GestureDetector(
-                            onTap: () => Get.toNamed(RouteHelper.cartScreen),
+                            onTap: () {
+                              product.totalItems <= 0
+                                  ? null
+                                  : Get.toNamed(RouteHelper.cartScreen);
+                            },
                             child: AppIcon(
                               icon: Icons.shopping_cart,
                             ),
                           ),
-                          Get.find<PopularProductController>().totalAmount >= 1
+                          product.totalItems >= 1
                               ? Positioned(
                                   top: 2,
                                   right: 2,
@@ -66,7 +77,7 @@ class DetailPopularBody extends StatelessWidget {
                                         color: AppColors.mainColor),
                                     child: FittedBox(
                                       child: AppSmallText(
-                                        text: product.totalAmount.toString(),
+                                        text: product.totalItems.toString(),
                                         color: Colors.white,
                                       ),
                                     ),

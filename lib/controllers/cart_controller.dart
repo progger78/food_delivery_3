@@ -24,7 +24,8 @@ class CartController extends GetxController {
               quantity: quantity + value.quantity!,
               price: value.price,
               img: value.img,
-              time: DateTime.now().toString());
+              time: DateTime.now().toString(),
+              product: product);
         },
       );
       if (totalQuantity <= 0) {
@@ -40,8 +41,10 @@ class CartController extends GetxController {
               quantity: quantity,
               price: product.price,
               img: product.img,
-              time: DateTime.now().toString()));
+              time: DateTime.now().toString(),
+              product: product));
     }
+    update();
   }
 
   bool existsInCart(ProductModel product) {
@@ -64,7 +67,7 @@ class CartController extends GetxController {
     return quantity;
   }
 
-  int get totalAmount {
+  int get totalItems {
     var totalAmount = 0;
     _items.forEach((key, value) {
       totalAmount += value.quantity!;
@@ -74,7 +77,15 @@ class CartController extends GetxController {
 
   List<CartModel> get getItems {
     return _items.entries.map((e) {
-     return e.value;
+      return e.value;
     }).toList();
+  }
+
+  int get totalAmount {
+    var totalAmount = 0;
+    _items.forEach((key, value) {
+      totalAmount += value.quantity! * value.price!;
+    });
+    return totalAmount;
   }
 }
