@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_3/controllers/popular_product_controller.dart';
+import 'package:food_delivery_3/controllers/recommended_product_controller.dart';
 import 'package:food_delivery_3/routes/route_helper.dart';
-import '/controllers/popular_product_controller.dart';
-import '/controllers/recommended_product_controller.dart';
+
 import '/utils/configurations.dart';
 import 'package:get/get.dart';
 import 'helper/dependencies.dart' as dep;
-import 'screens/home_screen/home_screen.dart';
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,25 +14,26 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProductController>().getPopularProductList();
-    Get.find<RecommendedProductController>().getRecommendedProductList();
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Food delivery',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: AppColors.mainColor,
-          secondary: AppColors.yelowColor,
+    return GetBuilder<PopularProductController>(
+      builder: (_) => GetBuilder<RecommendedProductController>(
+        builder: (controller) => GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Food delivery',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch().copyWith(
+              primary: AppColors.mainColor,
+              secondary: AppColors.yelowColor,
+            ),
+          ),
+          // home: const SplashScreen(),
+          initialRoute: RouteHelper.getSplashScreen(),
+          getPages: RouteHelper.routes,
         ),
       ),
-      home: const HomeScreen(),
-      initialRoute: RouteHelper.initialRoute,
-      getPages: RouteHelper.routes,
     );
   }
 }

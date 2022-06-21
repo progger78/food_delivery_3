@@ -45,7 +45,7 @@ class DetailRecommendedScreen extends StatelessWidget {
                       ),
                     ),
                     AppBigText(
-                      isBigger: true,
+                    
                       text:
                           '\$${recommendedProduct.price}  X  ${controller.inCartItems}',
                       size: Dimensions.font22,

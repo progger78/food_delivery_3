@@ -45,4 +45,8 @@ class Dimensions {
   static  double imageListViewBldr = screenWidth / 3.5;
   static  double textContainerListBldr = screenWidth / 4.05;
 
+    static  double logoImage = screenHeight / 2.70;
+    static  double logoText= screenHeight / 3.24 ;
+    
+  
 }

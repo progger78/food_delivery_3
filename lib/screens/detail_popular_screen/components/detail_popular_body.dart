@@ -114,7 +114,7 @@ class DetailPopularBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppBigText(
-                      isBigger: true,
+                      
                       text: (product?.name)!,
                       color: Colors.black,
                       size: Dimensions.font22,
